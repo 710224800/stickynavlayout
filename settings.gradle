@@ -1,1 +1,1 @@
-include ':app', ':stickynavlayout', ':viewpagerindicator'
+include ':app', ':stickynavlayout', ':viewpagerindicator', ':meituandetail'

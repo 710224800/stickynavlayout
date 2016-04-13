@@ -10,6 +10,7 @@ import android.graphics.Path;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -23,7 +24,6 @@ import java.util.List;
  * Created by luyh on 2016/3/8.
  */
 public class ViewPagerIndicator extends LinearLayout {
-    private Context context;
     /**
      * 绘制三角形的画笔
      */
@@ -208,6 +208,27 @@ public class ViewPagerIndicator extends LinearLayout {
                 if (onPageChangeListener != null) {
                     onPageChangeListener.onPageSelected(position);
                 }
+//                if (position > old_position) {
+//                    current_visible_position++;
+//                } else {
+//                    current_visible_position--;
+//                }
+//                if (current_visible_position > (mTabVisibleCount - 1)) {
+//                    if (position == (getChildCount() - 1)) {
+//                        current_visible_position = mTabVisibleCount;
+//                    } else {
+//                        current_visible_position = 3;
+//                    }
+//                }
+//                if (current_visible_position < 2) {
+//                    if (position == 0) {
+//                        current_visible_position = 1;
+//                    } else {
+//                        current_visible_position = 2;
+//                    }
+//                }
+////                Log.e("current_position", current_visible_position + "");
+//                old_position = position;
             }
 
             @Override
@@ -220,25 +241,48 @@ public class ViewPagerIndicator extends LinearLayout {
         mViewPager.setCurrentItem(pos);
     }
 
+    float old_offset = 0.0f;
+
+    int old_position = 0;
+    int current_visible_position = 1;
+
     private void scroll(int position, float offset) {
         // 不断改变偏移量，invalidate
         mTranslationX = getWidth() / mTabVisibleCount * (position + offset);
         int tabWidth = screenWidth / mTabVisibleCount;
-
         // 容器滚动，当移动到倒数最后一个的时候，开始滚动
-        if (offset > 0 && position >= (mTabVisibleCount - 2)
-                && getChildCount() > mTabVisibleCount) {
-            if (mTabVisibleCount != 1) {
-                this.scrollTo((position - (mTabVisibleCount - 2)) * tabWidth
-                        + (int) (tabWidth * offset), 0);
-            } else
-            // 为count为1时 的特殊处理
-            {
-                this.scrollTo(
-                        position * tabWidth + (int) (tabWidth * offset), 0);
+        int childCount = getChildCount();
+        if (offset > 0) {
+            if (old_offset < offset) {//向右滑
+                if (position >= (mTabVisibleCount - 2)
+                        && childCount > mTabVisibleCount && position != (childCount - 2)) {
+                    Log.e("currente_position", current_visible_position + "向右滑");
+                    if (mTabVisibleCount != 1) {
+                        this.scrollTo((position - (mTabVisibleCount - 2)) * tabWidth
+                                + (int) (tabWidth * offset), 0);
+                    } else
+                    // 为count为1时 的特殊处理
+                    {
+                        this.scrollTo(
+                                position * tabWidth + (int) (tabWidth * offset), 0);
+                    }
+                }
+            } else if (old_offset > offset) {//向左滑
+                if (position >= (mTabVisibleCount - 2) && childCount > mTabVisibleCount && position != (childCount - 2)) {
+                    Log.e("currente_position", current_visible_position + "向左滑");
+                    if (mTabVisibleCount != 1) {
+                        this.scrollTo((position - (mTabVisibleCount - 2)) * tabWidth
+                                + (int) (tabWidth * offset), 0);
+                    } else
+                    // 为count为1时 的特殊处理
+                    {
+                        this.scrollTo(
+                                position * tabWidth + (int) (tabWidth * offset), 0);
+                    }
+                }
             }
         }
-
+        old_offset = offset;
         invalidate();
     }
 

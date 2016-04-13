@@ -1,16 +1,10 @@
-package com.luyh.simples;
+package com.luyh.meituandetail;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Bundle;
 
 import com.luyh.viewpagerindicator.ViewPagerIndicator;
 
@@ -76,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(0);
+    }
+
+    private void notifyFragments(){
+
     }
 
     private void initViews() {

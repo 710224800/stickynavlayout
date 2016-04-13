@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meituandetail/meituandetail.iml" filepath="$PROJECT_DIR$/meituandetail/meituandetail.iml" />
       <module fileurl="file://$PROJECT_DIR$/stickynavlayout.iml" filepath="$PROJECT_DIR$/stickynavlayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/stickynavlayout/stickynavlayout-stickynavlayout.iml" filepath="$PROJECT_DIR$/stickynavlayout/stickynavlayout-stickynavlayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/viewpagerindicator/viewpagerindicator.iml" filepath="$PROJECT_DIR$/viewpagerindicator/viewpagerindicator.iml" />
